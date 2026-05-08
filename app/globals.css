@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ──────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme (default) */
+  --color-bg:            #F5F2ED;
+  --color-surface:       #FFFFFF;
+  --color-surface-2:     #EDE9E2;
+
+  --color-text-primary:   #1A1815;
+  --color-text-secondary: #6B6560;
+  --color-text-tertiary:  #A09890;
+
+  --color-accent:         #D4820A;
+  --color-accent-hover:   #B8700A;
+  --color-accent-muted:   #F5DBA8;
+  --color-accent-fg:      #FFFFFF;
+
+  --color-border:         #DDD8D0;
+  --color-border-strong:  #C4BEB5;
+
+  --shadow-sm: 0 1px 3px rgba(26,24,21,0.08), 0 1px 2px rgba(26,24,21,0.04);
+  --shadow-md: 0 4px 16px rgba(26,24,21,0.10), 0 2px 6px rgba(26,24,21,0.06);
+  --shadow-lg: 0 16px 48px rgba(26,24,21,0.12), 0 6px 18px rgba(26,24,21,0.07);
+
+  --color-success: #2D7A4F;
+  --color-warning: #B45309;
+  --color-error:   #C0392B;
+  --color-info:    #1D6FA4;
+
+  --color-shape-a: #D4820A;
+  --color-shape-b: #C4BEB5;
+  --color-shape-c: #1A1815;
 }
+
+/* Dark theme applied via next-themes data-theme attribute */
+[data-theme="dark"] {
+  --color-bg:            #111010;
+  --color-surface:       #1C1B1A;
+  --color-surface-2:     #252422;
+
+  --color-text-primary:   #F0EDE8;
+  --color-text-secondary: #8A8580;
+  --color-text-tertiary:  #5A5550;
+
+  --color-accent:         #00D4CC;
+  --color-accent-hover:   #00B8B2;
+  --color-accent-muted:   #003D3B;
+  --color-accent-fg:      #111010;
+
+  --color-border:         #2D2C2A;
+  --color-border-strong:  #3D3C39;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.20);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.40), 0 2px 6px rgba(0,0,0,0.25);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.50), 0 6px 18px rgba(0,0,0,0.30);
+
+  --color-success: #34C97A;
+  --color-warning: #F59E0B;
+  --color-error:   #F56565;
+  --color-info:    #63B3ED;
+
+  --color-shape-a: #00D4CC;
+  --color-shape-b: #2D2C2A;
+  --color-shape-c: #F0EDE8;
+}
+
+/* ─── Tailwind custom theme ───────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Type scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+  --text-7xl:  5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base styles ─────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* scroll-behavior is intentionally omitted — Lenis owns smooth scrolling.
+     Setting this to smooth here conflicts with Lenis and causes double-smoothing. */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Smooth theme transitions via CSS custom properties */
+  transition:
+    background-color 400ms ease,
+    color 400ms ease;
+}
+
+/* All major surfaces pick up theme colours */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
+
+/* Only apply the transition to elements that use CSS vars — avoid applying to animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Focus visible ───────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+
+/* ─── Font utility classes ────────────────────────────────────── */
+/* Reference the CSS variables injected by next/font at the <html> element */
+
+.font-display {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* ─── Marquee animation ───────────────────────────────────────── */
+
+:root {
+  /* ~30px/s on mobile, ~50px/s on desktop. Duration controls perceived speed
+     since the marquee track is always the same width (2× content width). */
+  --marquee-duration: 30s;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --marquee-duration: 20s;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─── Scroll cue bounce (reduced-motion already kills animations) */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+.animate-bounce {
+  animation: bounce-down 1.5s ease-in-out infinite;
+}
+
+/* ─── SVG stroke dash reveal ─────────────────────────────────── */
+/* Applied by GSAP — base state set here as fallback */
+#shape-hero-ring-path {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
 }
