@@ -75,7 +75,7 @@ export function AboutSection() {
             </p>
             <p className="font-body text-lg text-[var(--color-text-secondary)] leading-[1.625] mt-5">
               At Hunch, I lead the technology behind free-to-play products for global sportsbook
-              operator Superbet. My work spans architecture, product strategy, development, and
+              operator Superbet. My work involves architecture, product strategy, development, and
               delivery. Strong focus on building products that feel fast, polished, and intuitive to use.
             </p>
 
