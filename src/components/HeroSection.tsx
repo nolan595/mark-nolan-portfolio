@@ -282,27 +282,26 @@ export function HeroSection() {
         {/* Right — profile image */}
         <div
           ref={profileRef}
-          className="hidden lg:flex shrink-0 items-center justify-center"
+          className="flex shrink-0 items-center justify-center order-first lg:order-last"
           style={prefersReducedMotion ? {} : { opacity: 0 }}
           aria-hidden="true"
         >
           <div ref={profileFloatRef} className="relative">
-            {/* Decorative ring behind image */}
-            <div className="absolute inset-[-16px] rounded-full border border-[var(--color-accent)] opacity-25" />
-            <div className="absolute inset-[-32px] rounded-full border border-[var(--color-border)] opacity-40" />
+            {/* Decorative rings — desktop only */}
+            <div className="hidden lg:block absolute inset-[-16px] rounded-full border border-[var(--color-accent)] opacity-25" />
+            <div className="hidden lg:block absolute inset-[-32px] rounded-full border border-[var(--color-border)] opacity-40" />
 
             {/* Profile image — circular crop */}
-            <div className="relative w-[260px] h-[260px] xl:w-[300px] xl:h-[300px] rounded-full overflow-hidden bg-[var(--color-surface-2)] ring-1 ring-[var(--color-border)]">
+            <div className="relative w-[88px] h-[88px] lg:w-[260px] lg:h-[260px] xl:w-[300px] xl:h-[300px] rounded-full overflow-hidden bg-[var(--color-surface-2)] ring-1 ring-[var(--color-border)]">
               <Image
                 src="/images/profile.png"
                 alt="Mark Nolan"
                 fill
                 className="object-cover object-top"
                 priority
-                sizes="300px"
+                sizes="(max-width: 1024px) 88px, 300px"
               />
             </div>
-
           </div>
         </div>
       </div>
