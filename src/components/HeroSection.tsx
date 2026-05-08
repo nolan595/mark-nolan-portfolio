@@ -292,14 +292,14 @@ export function HeroSection() {
             <div className="hidden lg:block absolute inset-[-32px] rounded-full border border-[var(--color-border)] opacity-40" />
 
             {/* Profile image — circular crop */}
-            <div className="relative w-[88px] h-[88px] lg:w-[260px] lg:h-[260px] xl:w-[300px] xl:h-[300px] rounded-full overflow-hidden bg-[var(--color-surface-2)] ring-1 ring-[var(--color-border)]">
+            <div className="relative w-[160px] h-[160px] lg:w-[260px] lg:h-[260px] xl:w-[300px] xl:h-[300px] rounded-full overflow-hidden bg-[var(--color-surface-2)] ring-1 ring-[var(--color-border)]">
               <Image
                 src="/images/profile.png"
                 alt="Mark Nolan"
                 fill
                 className="object-cover object-top"
                 priority
-                sizes="(max-width: 1024px) 88px, 300px"
+                sizes="(max-width: 1024px) 160px, 300px"
               />
             </div>
           </div>
